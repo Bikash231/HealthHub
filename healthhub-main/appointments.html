@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealthHub</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <style>
+      .calendarArea {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        /* font-family: "DINPro", "Helvetica Neue", sans-serif; */
+        margin: 0;
+        box-sizing: border-box;
+        /* height: 100vh; */
+      }
+
+      .offset {
+      }
+
+      .outer {
+        position: relative;
+      }
+
+      .calendar {
+        margin: 0 auto;
+        max-width: 1280px;
+        min-width: 500px;
+
+        box-shadow: 0px 30px 50px rgba(0, 0, 0, 0.2),
+          0px 3px 7px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      .wrap {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-width: 1280px;
+        height: 500px;
+        border-radius: 8px;
+      }
+
+      thead {
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      thead th {
+        text-align: center;
+        width: 100%;
+      }
+
+      header {
+        background: #fff;
+        padding: 1rem;
+        color: rgba(0, 0, 0, 0.7);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px 8px 0px 0px;
+      }
+
+      header h1 {
+        font-size: 1.25rem;
+        text-align: center;
+        font-weight: normal;
+      }
+      tbody {
+        position: relative;
+        top: 100px;
+      }
+      table {
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      .headcol {
+        width: 60px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.5);
+        padding: 0.25rem 0;
+        text-align: center;
+        border: 0;
+        position: relative;
+        top: -12px;
+        border-bottom: 1px solid transparent;
+      }
+
+      thead th {
+        font-size: 1rem;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.9);
+        padding: 1rem;
+      }
+
+      thead {
+        z-index: 2;
+        background: white;
+        border-bottom: 2px solid #ddd;
+      }
+
+      tr,
+      tr td {
+        height: 20px;
+      }
+      td {
+        text-align: center;
+      }
+      tr:nth-child(odd) td:not(.headcol) {
+        border-bottom: 1px solid #e8e8e8;
+      }
+
+      tr:nth-child(even) td:not(.headcol) {
+        border-bottom: 1px solid #eee;
+      }
+
+      tr td {
+        border-right: 1px solid #eee;
+        padding: 0;
+        white-space: none;
+        word-wrap: nowrap;
+      }
+
+      tbody tr td {
+        position: relative;
+        vertical-align: top;
+        height: 40px;
+        padding: 0.25rem 0.25rem 0 0.25rem;
+        width: auto;
+      }
+
+      .secondary {
+        color: rgba(0, 0, 0, 0.4);
+      }
+
+      .checkbox {
+        display: none;
+      }
+
+      .checkbox + label {
+        border: 0;
+        outline: 0;
+        width: 100px;
+        height: 100px;
+        background: white;
+        color: transparent;
+        display: block;
+        display: none;
+      }
+
+      .checkbox:checked + label {
+        border: 0;
+        outline: 0;
+        width: 100%;
+        height: 100%;
+        background: red;
+        color: transparent;
+        display: inline-block;
+      }
+
+      .event {
+        background: #00b4fc;
+        color: white;
+        border-radius: 2px;
+        text-align: left;
+        font-size: 0.875rem;
+        z-index: 2;
+        padding: 0.5rem;
+        overflow-x: hidden;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+
+      .event:hover {
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        background: #00b4fc;
+      }
+
+      .event.double {
+        height: 200%;
+      }
+
+      /**
+thead {
+    tr {
+      display: block;
+      position: relative;
+    }
+  }
+tbody {
+    display: block;
+    overflow: auto;
+    width: 800px;
+    height: 100%;
+  }
+*/
+
+      td:hover:after {
+        content: "+";
+        vertical-align: middle;
+        font-size: 1.875rem;
+        font-weight: 100;
+        color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+      }
+
+      button.secondary {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: white;
+        padding: 0.5rem 0.75rem;
+        font-size: 14px;
+        border-radius: 2px;
+        color: rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      button.secondary:hover {
+        background: #fafafa;
+      }
+      button.secondary:active {
+        box-shadow: none;
+      }
+      button.secondary:focus {
+        outline: 0;
+      }
+
+      tr td:nth-child(2),
+      tr td:nth-child(3),
+      .past {
+        background: #fafafa;
+      }
+
+      .today {
+        color: red;
+      }
+
+      .now {
+        box-shadow: 0px -1px 0px 0px red;
+      }
+
+      .icon {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+        text-align: center;
+        cursor: pointer;
+        vertical-align: middle;
+        position: relative;
+        top: -2px;
+      }
+
+      .icon:hover {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="index.html"
+          ><img
+            src="img/healthub-logo.png"
+            class="pe-4"
+            height="24px"
+            alt="HealthHub"
+        /></a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="assessment.html"
+                >New Assessment</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="appointments.html"
+                >Patient Appointments</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="statistics-annual.html"
+                >Annual Statistics</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="statistics-geographic.html"
+                >Geographic Statistics</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a class="btn btn-sm btn-outline-secondary" href="#"
+              >Logged in as: Dr. G. Horvath</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>CT Scan Appointments</h1>
+        </div>
+      </div>
+      <div class="calendarArea">
+        <div class="calendar">
+          <header>
+            <button
+              class="secondary"
+              style="align-self: flex-start; flex: 0 0 1"
+            >
+              Today
+            </button>
+            <div
+              class="calendar__title"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div class="icon secondary chevron_left">‹</div>
+              <h1 class="" style="flex: 1">
+                <span></span><strong>12 June - 18 June</strong> 2023
+              </h1>
+              <div class="icon secondary chevron_left">›</div>
+            </div>
+            <div style="align-self: flex-start; flex: 0 0 1"></div>
+          </header>
+
+          <div class="outer">
+            <table>
+              <thead>
+                <tr>
+                  <th class="headcol"></th>
+                  <th>Mon, 12</th>
+                  <th>Tue, 13</th>
+                  <th>Wed, 14</th>
+                  <th>Thu, 15</th>
+                  <th>Fri, 16</th>
+                  <th class="secondary">Sat, 17</th>
+                  <th class="secondary">Sun, 18</th>
+                </tr>
+              </thead>
+            </table>
+
+            <div class="wrap">
+              <table class="offset">
+                <tbody>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">6:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">7:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">8:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <div class="event double">
+                        <input
+                          id="check"
+                          type="checkbox"
+                          class="checkbox"
+                        /><label for="check"></label>8:30–12:30 Anton Nemeth
+                        (International Medical Science Center, Budapest)
+                      </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">9:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">10:00</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <div class="event double">
+                        <input
+                          id="check"
+                          type="checkbox"
+                          class="checkbox"
+                        /><label for="check"></label>10:00–13:00 Henrietta Deák
+                        (Hungarian Army Medical Center, Budapest)
+                      </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">11:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">12:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">13:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">14:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">15:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">16:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">17:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol">18:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="headcol"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
