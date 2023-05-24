@@ -1,838 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HealthHub</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <style>
-      .circle-wrap {
-        margin: 150px auto;
-        width: 150px;
-        height: 150px;
-        background: #fefcff;
-        border-radius: 50%;
-        border: 1px solid #cdcbd0;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthHub</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style>
+    .circle-wrap {
+      margin: 150px auto;
+      width: 150px;
+      height: 150px;
+      background: #fefcff;
+      border-radius: 50%;
+      border: 1px solid #cdcbd0;
+    }
+
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fill {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+
+    .circle-wrap .inside-circle {
+      width: 122px;
+      height: 122px;
+      border-radius: 50%;
+      background: #d2eaf1;
+      line-height: 120px;
+      text-align: center;
+      margin-top: 14px;
+      margin-left: 14px;
+      color: #1e51dc;
+      position: absolute;
+      z-index: 100;
+      font-weight: 700;
+      font-size: 2em;
+    }
+
+    /* color animation */
+
+    /* 3rd progress bar */
+    .mask .fill {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #227ded;
+    }
+
+    .mask.full,
+    .circle .fill {
+      animation: fill ease-in-out 3s;
+      transform: rotate(135deg);
+    }
+
+    @keyframes fill {
+      0% {
+        transform: rotate(0deg);
       }
 
-      .circle-wrap .circle .mask,
-      .circle-wrap .circle .fill {
-        width: 150px;
-        height: 150px;
-        position: absolute;
-        border-radius: 50%;
-      }
-
-      .circle-wrap .circle .mask {
-        clip: rect(0px, 150px, 150px, 75px);
-      }
-
-      .circle-wrap .inside-circle {
-        width: 122px;
-        height: 122px;
-        border-radius: 50%;
-        background: #d2eaf1;
-        line-height: 120px;
-        text-align: center;
-        margin-top: 14px;
-        margin-left: 14px;
-        color: #1e51dc;
-        position: absolute;
-        z-index: 100;
-        font-weight: 700;
-        font-size: 2em;
-      }
-
-      /* color animation */
-
-      /* 3rd progress bar */
-      .mask .fill {
-        clip: rect(0px, 75px, 150px, 0px);
-        background-color: #227ded;
-      }
-
-      .mask.full,
-      .circle .fill {
-        animation: fill ease-in-out 3s;
+      100% {
         transform: rotate(135deg);
       }
+    }
+  </style>
+</head>
 
-      @keyframes fill {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(135deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.html"
-          ><img
-            src="img/healthub-logo.png"
-            class="pe-4"
-            height="24px"
-            alt="HealthHub"
-        /></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="assessment.html"
-                >New Assessment</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appointments.html"
-                >Patient Appointments</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-annual.html"
-                >Annual Statistics</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-geographic.html"
-                >Geographic Statistics</a
-              >
-            </li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-sm btn-outline-secondary" href="#"
-              >Logged in as: Dr. G. Horvath</a
-            >
-          </div>
+<body class="bg-primary">
+  <nav class="navbar navbar-expand-lg border-bottom mb-4" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="index.html"><img src="img/healthub-logo.png" class="pe-4" height="24px" alt="HealthHub" /></a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="assessment.html">New Assessment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments.html">Patient Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-annual.html">Annual Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-geographic.html">Geographic Statistics</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a class="btn btn-sm btn-outline-primary" href="#">Logged in as: Dr. G. Horvath</a>
         </div>
       </div>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="card p-4 text-center bg-light">
-            <h2>New CT Scan Assessment</h2>
-            <p id="noCtScan">
-              <a href="index.html" class="btn btn-danger"
-                >No CT Scan Necessary</a
-              >
-            </p>
-            <p>
-              The patient's data is necessary for an assessment of their risk
-              score.
-            </p>
+    </div>
+  </nav>
+
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col">
+        <div class="card p-4 text-center" style="background-color: #c6e2e9;">
+          <h2>New CT Scan Assessment</h2>
+          <p>
+            The patient's data is necessary for an assessment of their risk
+            score.
+          </p>
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text bg-warning" id="patientSSNumber">Patient's Social Security Number:</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-sm" id="inputPatientSSNumber" />
+              </div>
+            </div>
+          </div>
+          <p id="dataSource">
+            <a href="#" onclick="showQuestions(1)" class="btn btn-primary">Enter Data Manually</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#noPublicData" class="btn btn-success">Pull Data from
+              Social Security</a>
+          </p>
+          <p id="noCtScan" class="text-center">
+            <a href="index.html" class="btn btn-danger">Cancel CT Scan Assessment</a>
+          </p>
+          <div class="card p-4 text-start bg-white" id="questions1" style="display: none">
             <div class="row">
-              <div class="col-md-6 offset-md-3">
+              <div class="col-12">
+                <h2>Patient Data</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="div-12">
+                <div class="alert alert-warning text-center">
+                  These are only <strong>example</strong> questions.
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
                 <div class="input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="patientSSNumber"
-                    >Patient's Social Security Number:</span
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
+                  <span class="input-group-text" id="patientName">Name:</span>
+                  <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="patientAge">Age:</span>
+                  <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="patientHeight">Height in CM:</span>
+                  <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="patientWeight">Weight in KG:</span>
+                  <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="patientAddress">Address:</span>
+                  <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" />
+                </div>
+                <h4 class="mt-2">Gender:</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="gender1" />
+                  <label class="form-check-label" for="gender1">
+                    Female
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="gender2" />
+                  <label class="form-check-label" for="gender2"> Male </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="gender3" />
+                  <label class="form-check-label" for="gender3">
+                    Other
+                  </label>
                 </div>
               </div>
-            </div>
-            <p id="dataSource">
-              <a href="#" onclick="showQuestions(1)" class="btn btn-primary"
-                >Enter Data Manually</a
-              >
-              <a
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#noPublicData"
-                class="btn btn-success"
-                >Pull Data from Social Security</a
-              >
-            </p>
-            <div
-              class="card p-4 text-start"
-              id="questions1"
-              style="display: none"
-            >
-              <div class="row">
-                <div class="col-12">
-                  <h2>Patient Data</h2>
+
+              <div class="col-md-6">
+                <h4>Smoking:</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="smoking" id="smoking0" />
+                  <label class="form-check-label" for="smoking0">
+                    Never smoked
+                  </label>
                 </div>
-              </div>
-              <div class="row">
-                <div class="div-12">
-                  <div class="alert alert-warning">
-                    These are only example questions.
-                  </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="smoking" id="smoking1" />
+                  <label class="form-check-label" for="smoking1">
+                    Quit smoking (more than 1 year)
+                  </label>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="patientName">Name:</span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </div>
-                  <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="patientAge">Age:</span>
-                    <input
-                      type="number"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </div>
-                  <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="patientHeight"
-                      >Height in CM:</span
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </div>
-                  <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="patientWeight"
-                      >Weight in KG:</span
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </div>
-                  <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="patientAddress"
-                      >Address:</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </div>
-                  <h4 class="mt-2">Gender:</h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gender"
-                      id="gender1"
-                    />
-                    <label class="form-check-label" for="gender1">
-                      Female
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gender"
-                      id="gender2"
-                    />
-                    <label class="form-check-label" for="gender2"> Male </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gender"
-                      id="gender3"
-                    />
-                    <label class="form-check-label" for="gender3">
-                      Other
-                    </label>
-                  </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="smoking" id="smoking2" />
+                  <label class="form-check-label" for="smoking2">
+                    Quit smoking (less than 1 year)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="smoking" id="smoking3" />
+                  <label class="form-check-label" for="smoking3">
+                    Smoked within 30 days
+                  </label>
+                </div>
+                <h4 class="mt-4">Last Medical Checkup:</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="medCheck" id="medCheck1" />
+                  <label class="form-check-label" for="medCheck1">
+                    Less than 1 year ago
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="medCheck" id="medCheck2" />
+                  <label class="form-check-label" for="medCheck2">
+                    1 to 2 years ago
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="medCheck" id="medCheck3" />
+                  <label class="form-check-label" for="medCheck3">
+                    More than 2 years ago
+                  </label>
                 </div>
 
-                <div class="col-md-6">
-                  <h4>Smoking:</h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="smoking"
-                      id="smoking0"
-                    />
-                    <label class="form-check-label" for="smoking0">
-                      Never smoked
-                    </label>
+                <h4 class="mt-4">Minutes of weekly exercise:</h4>
+                <div class="row">
+                  <div class="col">
+                    <label for="moderateRange" class="form-label">Moderate activity</label>
+                    <input type="range" class="form-range" id="moderateRange" />
                   </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="smoking"
-                      id="smoking1"
-                    />
-                    <label class="form-check-label" for="smoking1">
-                      Quit smoking (more than 1 year)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="smoking"
-                      id="smoking2"
-                    />
-                    <label class="form-check-label" for="smoking2">
-                      Quit smoking (less than 1 year)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="smoking"
-                      id="smoking3"
-                    />
-                    <label class="form-check-label" for="smoking3">
-                      Smoked within 30 days
-                    </label>
-                  </div>
-                  <h4 class="mt-4">Last Medical Checkup:</h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="medCheck"
-                      id="medCheck1"
-                    />
-                    <label class="form-check-label" for="medCheck1">
-                      Less than 1 year ago
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="medCheck"
-                      id="medCheck2"
-                    />
-                    <label class="form-check-label" for="medCheck2">
-                      1 to 2 years ago
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="medCheck"
-                      id="medCheck3"
-                    />
-                    <label class="form-check-label" for="medCheck3">
-                      More than 2 years ago
-                    </label>
-                  </div>
-
-                  <h4 class="mt-4">Minutes of weekly exercise:</h4>
-                  <div class="row">
-                    <div class="col">
-                      <label for="moderateRange" class="form-label"
-                        >Moderate activity</label
-                      >
-                      <input
-                        type="range"
-                        class="form-range"
-                        id="moderateRange"
-                      />
-                    </div>
-                    <div class="col">
-                      <label for="vigorousRange" class="form-label"
-                        >Vigorous activity</label
-                      >
-                      <input
-                        type="range"
-                        class="form-range"
-                        id="vigorousRange"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col text-end">
-                  <button
-                    class="btn btn-outline-primary"
-                    onclick="showQuestions(2)"
-                  >
-                    Next &raquo;
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card p-4 text-start"
-              id="questions2"
-              style="display: none"
-            >
-              <div class="row">
-                <div class="col-12">
-                  <h2>Patient Data</h2>
-                </div>
-              </div>
-              <div class="row">
-                <div class="div-12">
-                  <div class="alert alert-warning">
-                    These are only example questions.
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <h4>
-                    How many first degree relatives (parents, siblings) have had
-                    cancer?
-                  </h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="cancer"
-                      id="cancer0"
-                    />
-                    <label class="form-check-label" for="cancer0"> 0 </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="cancer"
-                      id="cancer1"
-                    />
-                    <label class="form-check-label" for="cancer1"> 1 </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="cancer"
-                      id="cancer2"
-                    />
-                    <label class="form-check-label" for="cancer2"> 2 </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="cancer"
-                      id="cancer3"
-                    />
-                    <label class="form-check-label" for="smoking3">
-                      I don't know
-                    </label>
-                  </div>
-                  <h4 class="mt-4">
-                    Did any woman in your family have bilateral cancer?
-                  </h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="bilateral"
-                      id="bilateral1"
-                    />
-                    <label class="form-check-label" for="bilateral1">
-                      Yes
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="bilateral"
-                      id="bilateral2"
-                    />
-                    <label class="form-check-label" for="bilateral2">
-                      No
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="bilateral"
-                      id="bilateral3"
-                    />
-                    <label class="form-check-label" for="bilateral3">
-                      I don't know
-                    </label>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <h4>Did any woman in your family have ovarian cancer?</h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="ovarian"
-                      id="ovarian1"
-                    />
-                    <label class="form-check-label" for="ovarian1"> Yes </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="ovarian"
-                      id="ovarian2"
-                    />
-                    <label class="form-check-label" for="ovarian2"> No </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="ovarian"
-                      id="ovarian3"
-                    />
-                    <label class="form-check-label" for="ovarian">
-                      I don't know
-                    </label>
-                  </div>
-
-                  <h4 class="mt-4">
-                    Indicate other cancer history in the family:
-                  </h4>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      2 relatives with breast cancer
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      2 relatives with ovarian cancer
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      2 relatives with colorectal cancer
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      1 relative with breast cancer and another with ovarian
-                      cancer
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      1 or more relatives with other cancer type
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col text-end">
-                  <button class="btn btn-outline-primary" onclick="showRisk()">
-                    Risk Result &raquo;
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card p-4 text-start"
-              id="riskProgress"
-              style="display: none"
-            >
-              <div class="row">
-                <div class="col-12">
-                  <h2>Patient Risk Result</h2>
-                  <div class="row">
-                    <div class="col-12 text-center mt-4">
-                      <h3 class="badge text-bg-success">
-                        AI Assistant is Processing Data
-                      </h3>
-                    </div>
-                  </div>
-                  <div class="circle-wrap">
-                    <div class="circle">
-                      <div class="mask full">
-                        <div class="fill"></div>
-                      </div>
-                      <div class="mask half">
-                        <div class="fill"></div>
-                      </div>
-                      <div class="inside-circle">75%</div>
-                    </div>
+                  <div class="col">
+                    <label for="vigorousRange" class="form-label">Vigorous activity</label>
+                    <input type="range" class="form-range" id="vigorousRange" />
                   </div>
                 </div>
               </div>
             </div>
-            <div
-              class="card p-4 text-start"
-              id="riskResult"
-              style="display: none"
-            >
-              <div class="row">
-                <div class="col-12 text-center">
-                  <h2>Patient Risk Result</h2>
-                  <h3>
-                    <span class="badge bg-danger">High Risk!</span>
-                  </h3>
-                  <h3>
-                    The Risk Score of this patient is:
-                    <span class="badge bg-danger">9</span>
-                  </h3>
+            <div class="row mt-4">
+              <div class="col text-end">
+                <button class="btn btn-outline-primary" onclick="showQuestions(2)">
+                  Next &raquo;
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card p-4 text-start" id="questions2" style="display: none">
+            <div class="row">
+              <div class="col-12">
+                <h2>Patient Data</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="div-12">
+                <div class="alert alert-warning text-center">
+                  These are only <strong>example</strong> questions.
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>
+                  How many first degree relatives (parents, siblings) have had
+                  cancer?
+                </h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="cancer" id="cancer0" />
+                  <label class="form-check-label" for="cancer0"> 0 </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="cancer" id="cancer1" />
+                  <label class="form-check-label" for="cancer1"> 1 </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="cancer" id="cancer2" />
+                  <label class="form-check-label" for="cancer2"> 2 </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="cancer" id="cancer3" />
+                  <label class="form-check-label" for="smoking3">
+                    I don't know
+                  </label>
+                </div>
+                <h4 class="mt-4">
+                  Did any woman in your family have bilateral cancer?
+                </h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="bilateral" id="bilateral1" />
+                  <label class="form-check-label" for="bilateral1">
+                    Yes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="bilateral" id="bilateral2" />
+                  <label class="form-check-label" for="bilateral2">
+                    No
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="bilateral" id="bilateral3" />
+                  <label class="form-check-label" for="bilateral3">
+                    I don't know
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <h4>Did any woman in your family have ovarian cancer?</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="ovarian" id="ovarian1" />
+                  <label class="form-check-label" for="ovarian1"> Yes </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="ovarian" id="ovarian2" />
+                  <label class="form-check-label" for="ovarian2"> No </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="ovarian" id="ovarian3" />
+                  <label class="form-check-label" for="ovarian">
+                    I don't know
+                  </label>
+                </div>
+
+                <h4 class="mt-4">
+                  Indicate other cancer history in the family:
+                </h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" />
+                  <label class="form-check-label" for="flexCheckChecked1">
+                    2 relatives with breast cancer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" />
+                  <label class="form-check-label" for="flexCheckChecked2">
+                    2 relatives with ovarian cancer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3" />
+                  <label class="form-check-label" for="flexCheckChecked3">
+                    2 relatives with colorectal cancer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4" />
+                  <label class="form-check-label" for="flexCheckChecked4">
+                    1 relative with breast cancer and another with ovarian
+                    cancer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked5" />
+                  <label class="form-check-label" for="flexCheckChecked5">
+                    1 or more relatives with other cancer type
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col text-end">
+                <button class="btn btn-outline-primary" onclick="showQuestions(1, 2)">
+                  &laquo; Back to previous
+                </button>
+                <button class="btn btn-primary" onclick="showRisk()">
+                  Risk Result &raquo;
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card p-4 text-start" id="riskProgress" style="display: none">
+            <div class="row">
+              <div class="col-12">
+                <h2>Patient Risk Result</h2>
+                <div class="row">
+                  <div class="col-12 text-center mt-4">
+                    <h3 class="badge text-bg-success">
+                      AI Assistant is Processing Data
+                    </h3>
+                  </div>
+                </div>
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle">75%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card p-4 text-start" id="riskResult" style="display: none">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h2>Patient Risk Result</h2>
+                <h3>
+                  <span class="badge bg-danger">High Risk!</span>
+                </h3>
+                <h3>
+                  The Risk Score of this patient is:
+                  <span class="badge bg-danger">9</span>
+                </h3>
+                <p>
+                  It is highly recommended that this patient is checked
+                  thoroughly with a <strong>CT Scan</strong>
+                </p>
+                <div class="text-start alert alert-warning">
+                  <h4>Reasons for Urgency</h4>
+                  <ul>
+                    <li>Gallia est omnis divisa in partes tres, quarum.</li>
+                    <li>
+                      Excepteur sint obcaecat cupiditat non proident culpa.
+                    </li>
+                    <li>
+                      Ut enim ad minim veniam, quis nostrud exercitation.
+                    </li>
+                  </ul>
+                </div>
+                <div class="text-center alert alert-danger">
                   <p>
-                    It is highly recommended that this patient is checked
-                    thoroughly with a <strong>CT Scan</strong>
+                    This AI generated risk score is not a replacement for the
+                    medical assessment of a healthcare professional.
                   </p>
-                  <div class="text-start alert alert-warning">
-                    <h4>Reasons for Urgency</h4>
-                    <ul>
-                      <li>Gallia est omnis divisa in partes tres, quarum.</li>
-                      <li>
-                        Excepteur sint obcaecat cupiditat non proident culpa.
-                      </li>
-                      <li>
-                        Ut enim ad minim veniam, quis nostrud exercitation.
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="text-center alert alert-danger">
-                    <p>
-                      This AI generated risk score is not a replacement for the
-                      medical assessment of a healthcare professional.
-                    </p>
-                    <p>
-                      If you do not agree with the AI output:
-                      <button
-                        class="btn btn-sm btn-outline-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#wrongAIReport"
-                      >
-                        Report AI Error
-                      </button>
-                    </p>
-                  </div>
-                  <h2>Doctor's Assessment</h2>
+                  <p>
+                    If you do not agree with the AI output:
+                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                      data-bs-target="#wrongAIReport">
+                      Report AI Error
+                    </button>
+                  </p>
+                </div>
+                <h2>Doctor's Assessment</h2>
+                <div class="mb-3">
                   <div class="mb-3">
-                    <div class="mb-3">
-                      <label for="basic-url" class="form-label"
-                        >Change Risk Score</label
-                      >
-                      <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3"
-                          >Changed Risk Score</span
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="basic-url"
-                          value="9"
-                          aria-describedby="basic-addon3 basic-addon4"
-                        />
-                      </div>
-                      <div class="form-text" id="basic-addon4">
-                        The assessment is digitally signed with
-                        <span class="badge text-bg-warning">Dr. G. Horvath</span
-                        >. Always provide a reason when you change the risk
-                        score
-                      </div>
+                    <label for="basic-url" class="form-label">Change Risk Score</label>
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3">Changed Risk Score</span>
+                      <input type="number" class="form-control" id="basic-url" value="9"
+                        aria-describedby="basic-addon3 basic-addon4" />
                     </div>
-                    <label for="exampleFormControlTextarea1" class="form-label"
-                      >Reasons:</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                    ></textarea>
+                    <div class="form-text" id="basic-addon4">
+                      The assessment is digitally signed with
+                      <span class="badge text-bg-warning">Dr. G. Horvath</span>. Always provide a reason when you change
+                      the risk
+                      score
+                    </div>
                   </div>
+                  <label for="exampleFormControlTextarea1" class="form-label">Reasons:</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-12 text-end">
-                  <a
-                    class="btn btn-outline-primary"
-                    href="available-scanners.html"
-                  >
-                    Find Available CT Scanners
-                  </a>
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-end">
+                <a class="btn btn-primary" href="available-scanners.html">
+                  Find Available CT Scanners
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="noPublicData"
-      tabindex="-1"
-      aria-labelledby="noPublicDataLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="noPublicDataLabel">
-              No Data Available for this Patient
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              There is no data available for this patient in the public social
-              security system.
-            </p>
-            <p>
-              Possible reasons are: the patient has not approved data sharing or
-              there is a technical issue.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="wrongAIReport"
-      tabindex="-1"
-      aria-labelledby="wrongAIReportLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="wrongAIReportLabel">
-              Report Wrong AI Output
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              You can report a mistake or inaccuracy made by the AI. This will
-              help us to improve the AI in the future.
-            </p>
-            <p>Description of AI Error:</p>
-            <div class="form-floating">
-              <textarea
-                class="form-control"
-                placeholder="Write a description of AI error"
-                id="floatingTextarea2"
-                style="height: 100px"
-              ></textarea>
-              <label for="floatingTextarea2">Description</label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
-            >
-              Submit
-            </button>
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="noPublicData" tabindex="-1" aria-labelledby="noPublicDataLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="noPublicDataLabel">
+            No Data Available for this Patient
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            There is no data available for this patient in the public social
+            security system.
+          </p>
+          <p>
+            Possible reasons are: the patient has not approved data sharing or
+            there is a technical issue.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
         </div>
       </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script>
-      function showQuestions(questionsNumber) {
-        if (questionsNumber > 1) {
-          document.getElementById(
-            "questions" + (questionsNumber - 1)
-          ).style.display = "none";
-        }
-        document.getElementById("noCtScan").style.display = "none";
-        document.getElementById("dataSource").style.display = "none";
-        document.getElementById("questions" + questionsNumber).style.display =
-          "block";
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="noPSSN" tabindex="-1" aria-labelledby="noPSSNLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="noPSSNLabel">
+            No Patient Social Security Number Entered
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Please enter a social security number for the patient.<br />
+            <strong>Enter any number you like to proceed.</strong>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="wrongAIReport" tabindex="-1" aria-labelledby="wrongAIReportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="wrongAIReportLabel">
+            Report Wrong AI Output
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            You can report a mistake or inaccuracy made by the AI. This will
+            help us to improve the AI in the future.
+          </p>
+          <p>Description of AI Error:</p>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Write a description of AI error" id="floatingTextarea2"
+              style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Description</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function showQuestions(questionsNumber, hideNumber) {
+      const pssn = document.getElementById("inputPatientSSNumber").value;
+
+      if (!pssn) {
+        const noPSSNModal = new bootstrap.Modal(document.getElementById('noPSSN'), { keyboard: true });
+        noPSSNModal.show();
+        return;
       }
-      function showRisk() {
-        document.getElementById("questions2").style.display = "none";
-        document.getElementById("riskProgress").style.display = "block";
-        setTimeout(function () {
-          document.getElementById("riskProgress").style.display = "none";
-          document.getElementById("riskResult").style.display = "block";
-        }, 3000);
+
+      if (questionsNumber > 1) {
+        document.getElementById(
+          "questions" + (questionsNumber - 1)
+        ).style.display = "none";
       }
-    </script>
-  </body>
+
+      if (hideNumber) {
+        document.getElementById(
+          "questions" + hideNumber
+        ).style.display = "none";
+      }
+
+      document.getElementById("noCtScan").style.display = "none";
+      document.getElementById("dataSource").style.display = "none";
+      document.getElementById("questions" + questionsNumber).style.display =
+        "block";
+    }
+    function showRisk() {
+      document.getElementById("questions2").style.display = "none";
+      document.getElementById("riskProgress").style.display = "block";
+      setTimeout(function () {
+        document.getElementById("riskProgress").style.display = "none";
+        document.getElementById("riskResult").style.display = "block";
+      }, 3000);
+    }
+  </script>
+</body>
+
 </html>

@@ -1,145 +1,126 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CT Scan Dashboard</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <style>
-      #card {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-top: 20px;
-      }
-    </style>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.html"
-          ><img
-            src="img/healthub-logo.png"
-            class="pe-4"
-            height="24px"
-            alt="HealthHub"
-        /></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="assessment.html"
-                >New Assessment</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appointments.html"
-                >Patient Appointments</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-annual.html"
-                >Annual Statistics</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-geographic.html"
-                >Geographic Statistics</a
-              >
-            </li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-sm btn-outline-secondary" href="#"
-              >Logged in as: Dr. G. Horvath</a
-            >
-          </div>
-        </div>
-      </div>
-    </nav>
 
-    <div class="container">
-      <div class="row">
-        <div class="col card p-4 bg-light">
-          <h1 class="text-center">Annual CT Scan Statistics</h1>
-          <p>
-            Transparency of data encourages change. By exposing the usage and
-            availability of CT scanners, the stakeholders can see which areas
-            need to be improved. It shows the trends and which purchases will
-            become necessary to meet the demand.
-          </p>
-          <p>
-            As can be seen in the chart, the trend is that the waiting times
-            have increased drastically. Therefore, it is necessary to
-            requisition more CT scanners.
-          </p>
-          <div id="plot"></div>
-          <div id="card" class="alert alert-warning"></div>
+<head>
+  <meta charset="utf-8">
+  <title>CT Scan Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    #card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body class="bg-primary">
+  <nav class="navbar navbar-expand-lg border-bottom mb-4" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="index.html"><img src="img/healthub-logo.png" class="pe-4" height="24px" alt="HealthHub" /></a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="assessment.html">New Assessment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments.html">Patient Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-annual.html">Annual Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-geographic.html">Geographic Statistics</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a class="btn btn-sm btn-outline-primary" href="#">Logged in as: Dr. G. Horvath</a>
         </div>
       </div>
     </div>
+  </nav>
 
-    <script>
-      Plotly.d3.csv("data/scan_data.csv", function (err, rows) {
-        function unpack(rows, key) {
-          return rows.map(function (row) {
-            return row[key];
-          });
-        }
+  <div class="container">
+    <div class="row">
+      <div class="col card p-4 bg-light">
+        <h1 class="text-center">Annual CT Scan Statistics</h1>
+        <p>
+          Transparency of data encourages change. By exposing the usage and
+          availability of CT scanners, the stakeholders can see which areas
+          need to be improved. It shows the trends and which purchases will
+          become necessary to meet the demand.
+        </p>
+        <p>
+          As can be seen in the chart, the trend is that the waiting times
+          have increased drastically. Therefore, it is necessary to
+          requisition more CT scanners.
+        </p>
+        <div id="plot"></div>
+        <div id="card" class="alert alert-warning"></div>
+      </div>
+    </div>
+  </div>
 
-        var years = unpack(rows, "Year");
-        var waitingTimes = unpack(rows, "Avg Waiting Time (in Days)");
-
-        var trace = {
-          x: years,
-          y: waitingTimes,
-          mode: "markers+lines",
-          type: "scatter",
-          marker: { symbol: "circle", size: 6 },
-        };
-
-        var layout = {
-          xaxis: { title: "Year" },
-          yaxis: { title: "Avg Waiting Time (in Days)" },
-          title: "Average Waiting Time for CT Scans over the Years",
-        };
-
-        var data = [trace];
-        Plotly.newPlot("plot", data, layout);
-
-        var card = document.getElementById("card");
-
-        function displayValue(value, year) {
-          card.innerHTML = `<div class="row"><div class="col-6 text-center">Average waiting time in days: <span class="badge text-bg-primary">${value}</span></div><div class="col-6 text-center">In year: <span class="badge text-bg-success">${year}</span></div></div>`;
-        }
-
-        function clearCard() {
-          card.innerHTML = "Click on the graph to display a value.";
-        }
-
-        // Add event listener to the graph
-        var plot = document.getElementById("plot");
-        plot.on("plotly_click", function (data) {
-          var pointData = data.points[0];
-          var year = pointData.x;
-          var waitingTime = pointData.y;
-          displayValue(waitingTime, year);
+  <script>
+    Plotly.d3.csv("data/scan_data.csv", function (err, rows) {
+      function unpack(rows, key) {
+        return rows.map(function (row) {
+          return row[key];
         });
+      }
 
-        // Initialize the card
-        clearCard();
+      var years = unpack(rows, "Year");
+      var waitingTimes = unpack(rows, "Avg Waiting Time (in Days)");
+
+      var trace = {
+        x: years,
+        y: waitingTimes,
+        mode: "markers+lines",
+        type: "scatter",
+        marker: { symbol: "circle", size: 6 },
+      };
+
+      var layout = {
+        xaxis: { title: "Year" },
+        yaxis: { title: "Avg Waiting Time (in Days)" },
+        title: "Average Waiting Time for CT Scans over the Years",
+      };
+
+      var data = [trace];
+      Plotly.newPlot("plot", data, layout);
+
+      var card = document.getElementById("card");
+
+      function displayValue(value, year) {
+        card.innerHTML = `<div class="row"><div class="col-6 text-center">Average waiting time in days: <span class="badge text-bg-primary">${value}</span></div><div class="col-6 text-center">In year: <span class="badge text-bg-success">${year}</span></div></div>`;
+      }
+
+      function clearCard() {
+        card.innerHTML = "Click on the graph to display a value.";
+      }
+
+      // Add event listener to the graph
+      var plot = document.getElementById("plot");
+      plot.on("plotly_click", function (data) {
+        var pointData = data.points[0];
+        var year = pointData.x;
+        var waitingTime = pointData.y;
+        displayValue(waitingTime, year);
       });
-    </script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-  </body>
+
+      // Initialize the card
+      clearCard();
+    });
+  </script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

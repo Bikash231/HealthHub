@@ -1,180 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HealthHub</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.html"
-          ><img
-            src="img/healthub-logo.png"
-            class="pe-4"
-            height="24px"
-            alt="HealthHub"
-        /></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="assessment.html"
-                >New Assessment</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appointments.html"
-                >Patient Appointments</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-annual.html"
-                >Annual Statistics</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-geographic.html"
-                >Geographic Statistics</a
-              >
-            </li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-sm btn-outline-secondary" href="#"
-              >Logged in as: Dr. G. Horvath</a
-            >
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthHub</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+
+<body class="bg-primary">
+  <nav class="navbar navbar-expand-lg border-bottom mb-4" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="index.html"><img src="img/healthub-logo.png" class="pe-4" height="24px" alt="HealthHub" /></a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="assessment.html">New Assessment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments.html">Patient Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-annual.html">Annual Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-geographic.html">Geographic Statistics</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a class="btn btn-sm btn-outline-primary" href="#">Logged in as: Dr. G. Horvath</a>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <p class="alert alert-primary">
-            <strong>HealthHub</strong> is your AI-driven assistant to assess
-            whether your patient needs a CT scan and find available CT scanners.
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col-md-12 text-center my-4">
+        <h1 class="text-light fs-4">
+          <strong>HealthHub</strong> is your AI-driven assistant.<br />Assess
+          whether your patient needs a computed tomography scan and find available CT scanners.
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 pb-4">
+        <div class="card p-4 text-center" style="background-color: #c6e2e9;">
+          <h2>New CT Scan<br />Assessment</h2>
+          <a href="assessment.html" class="text-center"><img src="img/start-scan-assessment.png" class="rounded"
+              alt="New Patient for CT Scan" height="100px" /></a>
+          <p>
+            Create a CT scan assessment for a
+            <strong>new patient.</strong> Evaluate if a patient needs a CT
+            scan and which CT locations are free at which dates
+          </p>
+          <p>
+            <a href="assessment.html" class="btn btn-primary">New Assessment</a>
           </p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-4 pb-4">
-          <div class="card p-4 text-center bg-light">
-            <h2>New CT Scan Assessment</h2>
-            <a href="assessment.html"
-              ><img
-                src="img/ct-scan.jpg"
-                class="img-fluid rounded"
-                alt="New Patient for CT Scan"
-            /></a>
-            <p>
-              Create a CT scan assessment for a
-              <strong>new patient.</strong> Evaluate if a patient needs a CT
-              scan and which CT locations are free at which dates
-            </p>
-            <p>
-              <a href="assessment.html" class="btn btn-success"
-                >New Assessment</a
-              >
-            </p>
+      <div class="col-lg-8">
+        <div class="card p-4 text-center" style="background-color: #f1ffc4;">
+          <h2>Previous Patient<br />Assessments</h2>
+          <a class="text-center"><img src="img/patients.png" class="rounded" alt="Existing Patient Appointments"
+              height="100px" /></a>
+          <div class="input-group my-3">
+            <input type="text" class="form-control" placeholder="Filter by name or address" aria-label="filterInput"
+              aria-describedby="button-addon2" />
+            <button class="btn btn-outline-primary" type="button" id="button-addon2">
+              Filter
+            </button>
           </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="card p-4 text-center bg-light">
-            <h2>Previous Patient Assessments</h2>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Filter by name or address"
-                aria-label="filterInput"
-                aria-describedby="button-addon2"
-              />
-              <button
-                class="btn btn-outline-primary"
-                type="button"
-                id="button-addon2"
-              >
-                Filter
-              </button>
-            </div>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Risk Score</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">CT Date</th>
-                    <th scope="col">Edit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Gizella</td>
-                    <td>Mészáros</td>
-                    <td><span class="badge text-bg-danger">8</span></td>
-                    <td>Ipsum Street 9, Budapest</td>
-                    <td>gizella@hotmail.com</td>
-                    <td>12.06.2023</td>
-                    <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jázmin</td>
-                    <td>Magyar</td>
-                    <td><span class="badge text-bg-secondary">5</span></td>
-                    <td>Lorem Street 12, Győr</td>
-                    <td>jmagyar@gmail.com</td>
-                    <td>14.06.2023</td>
-                    <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Bendegúz</td>
-                    <td>Faragó</td>
-                    <td><span class="badge text-bg-success">3</span></td>
-                    <td>Paullum Street 4, Budapest</td>
-                    <td>bfarago@yahoo.com</td>
-                    <td>18.07.2023</td>
-                    <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Vilmos</td>
-                    <td>Balogh</td>
-                    <td><span class="badge text-bg-warning">6</span></td>
-                    <td>Iudicaretur Str. 45, Budapest</td>
-                    <td>vbalogh@email.hu</td>
-                    <td>22.07.2023</td>
-                    <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Risk Score</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">CT Date</th>
+                  <th scope="col">Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Gizella</td>
+                  <td>Mészáros</td>
+                  <td><span class="badge text-bg-danger">8</span></td>
+                  <td>Ipsum Street 9, Budapest</td>
+                  <td>gizella@hotmail.com</td>
+                  <td>12.06.2023</td>
+                  <td><a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                      data-bs-target="#editPatient">Edit</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jázmin</td>
+                  <td>Magyar</td>
+                  <td><span class="badge text-bg-secondary">5</span></td>
+                  <td>Lorem Street 12, Győr</td>
+                  <td>jmagyar@gmail.com</td>
+                  <td>14.06.2023</td>
+                  <td><a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                      data-bs-target="#editPatient">Edit</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Bendegúz</td>
+                  <td>Faragó</td>
+                  <td><span class="badge text-bg-success">3</span></td>
+                  <td>Paullum Street 4, Budapest</td>
+                  <td>bfarago@yahoo.com</td>
+                  <td>18.07.2023</td>
+                  <td><a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                      data-bs-target="#editPatient">Edit</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Vilmos</td>
+                  <td>Balogh</td>
+                  <td><span class="badge text-bg-warning">6</span></td>
+                  <td>Iudicaretur Str. 45, Budapest</td>
+                  <td>vbalogh@email.hu</td>
+                  <td>22.07.2023</td>
+                  <td><a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                      data-bs-target="#editPatient">Edit</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-  </body>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="editPatient" tabindex="-1" aria-labelledby="editPatientLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editPatientLabel">
+            Edit Patient Assessment
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            See the patient data here, make adjustments and submit it again.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

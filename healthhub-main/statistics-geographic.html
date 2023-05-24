@@ -1,204 +1,177 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>HealthHub</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.4/d3.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <style>
-      #map {
-        height: 400px;
-      }
 
-      #card {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.html"
-          ><img
-            src="img/healthub-logo.png"
-            class="pe-4"
-            height="24px"
-            alt="HealthHub"
-        /></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="assessment.html"
-                >New Assessment</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appointments.html"
-                >Patient Appointments</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-annual.html"
-                >Annual Statistics</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-geographic.html"
-                >Geographic Statistics</a
-              >
-            </li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-sm btn-outline-secondary" href="#"
-              >Logged in as: Dr. G. Horvath</a
-            >
-          </div>
+<head>
+  <title>HealthHub</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.4/d3.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style>
+    #map {
+      height: 400px;
+    }
+
+    #card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body class="bg-primary">
+  <nav class="navbar navbar-expand-lg border-bottom mb-4" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="index.html"><img src="img/healthub-logo.png" class="pe-4" height="24px" alt="HealthHub" /></a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="assessment.html">New Assessment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments.html">Patient Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-annual.html">Annual Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-geographic.html">Geographic Statistics</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a class="btn btn-sm btn-outline-primary" href="#">Logged in as: Dr. G. Horvath</a>
         </div>
       </div>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <div class="card bg-light p-4">
-            <h1>CT Geographic Data</h1>
-            <p>
-              Click on any of the four cities for the number of patients scanned
-              and CT scanners available in
-              <span class="badge text-bg-primary">2022</span>
-            </p>
-            <p>
-              Transparency of data encourages change. By exposing the usage and
-              availability of CT scanners, the stakeholders can see which areas
-              need to be improved. It shows the trends and which purchases will
-              become necessary to meet the demand.
-            </p>
-            <div id="map" class="rounded"></div>
-            <div class="row mt-2 alert alert-warning">
-              <div class="col-6">
-                Annual Patients Scanned:
-                <span id="card1" class="badge text-bg-primary"
-                  >Select a City</span
-                >
-              </div>
-              <div class="col-6">
-                Number of CT Scan Devices:
-                <span id="card2" class="badge text-bg-success"
-                  >Select a City</span
-                >
-              </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="card bg-light p-4">
+          <h1>CT Geographic Data</h1>
+          <p>
+            Click on any of the four cities for the number of patients scanned
+            and CT scanners available in
+            <span class="badge text-bg-primary">2022</span>
+          </p>
+          <p>
+            Transparency of data encourages change. By exposing the usage and
+            availability of CT scanners, the stakeholders can see which areas
+            need to be improved. It shows the trends and which purchases will
+            become necessary to meet the demand.
+          </p>
+          <div id="map" class="rounded"></div>
+          <div class="row mt-2 alert alert-warning">
+            <div class="col-6">
+              Annual Patients Scanned:
+              <span id="card1" class="badge text-bg-primary">Select a City</span>
+            </div>
+            <div class="col-6">
+              Number of CT Scan Devices:
+              <span id="card2" class="badge text-bg-success">Select a City</span>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-      // Load the CSV data
-      Promise.all([
-        fetch("data/hungary_cities.csv").then((response) => response.text()),
-        fetch("data/scan_data.csv").then((response) => response.text()),
-      ])
-        .then(function (results) {
-          var hungaryData = d3.csvParse(results[0]);
-          var scanData = d3.csvParse(results[1]);
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Load the CSV data
+    Promise.all([
+      fetch("data/hungary_cities.csv").then((response) => response.text()),
+      fetch("data/scan_data.csv").then((response) => response.text()),
+    ])
+      .then(function (results) {
+        var hungaryData = d3.csvParse(results[0]);
+        var scanData = d3.csvParse(results[1]);
 
-          // Process the data
-          var cityData = {};
-          hungaryData.forEach(function (d) {
-            var city = d.City;
-            cityData[city] = {
-              isoCode: d["ISO 3166-2 Code"],
-              patients: +d.Paitents,
-              ctScanDevices: +d["CT-scan devices"],
-            };
-          });
-
-          // Create the map
-          var mymap = L.map("map").setView([47.5, 19.0], 7);
-
-          // Add the OpenStreetMap tile layer
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution:
-              'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-            maxZoom: 18,
-          }).addTo(mymap);
-
-          // Add markers to the map
-          Object.keys(cityData).forEach(function (city) {
-            var data = cityData[city];
-            var isoCode = data.isoCode;
-            var patients = data.patients;
-            var ctScanDevices = data.ctScanDevices;
-
-            var coordinates = getCityCoordinates(isoCode);
-            var marker = L.marker(coordinates).addTo(mymap);
-            marker.bindPopup(
-              "<b>" +
-                city +
-                "</b><br>ISO Code: " +
-                isoCode +
-                "<br>Patients: " +
-                patients +
-                "<br>CT Scan Devices: " +
-                ctScanDevices
-            );
-
-            // Update the card when clicking on a marker
-            marker.on("click", function () {
-              displayValue(patients, document.getElementById("card1"));
-              displayValue(ctScanDevices, document.getElementById("card2"));
-            });
-          });
-
-          // Function to get the coordinates of a city based on its ISO code
-          function getCityCoordinates(isoCode) {
-            switch (isoCode) {
-              case "HU-BU":
-                return [47.4984, 19.0408]; // Budapest
-              case "HU-DE":
-                return [47.5316, 21.6273]; // Debrecen
-              case "HU-TB":
-                return [47.5709, 18.4242]; // Tatabánya
-              case "HU-PS":
-                return [46.0763, 18.2281]; // Pécs
-              // Add more cases for other cities
-              default:
-                return [0, 0]; // Default to [0, 0] if coordinates are not found
-            }
-          }
-
-          // Function to display a value in the card
-          function displayValue(value, card) {
-            card.textContent = value;
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
+        // Process the data
+        var cityData = {};
+        hungaryData.forEach(function (d) {
+          var city = d.City;
+          cityData[city] = {
+            isoCode: d["ISO 3166-2 Code"],
+            patients: +d.Paitents,
+            ctScanDevices: +d["CT-scan devices"],
+          };
         });
-    </script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-  </body>
+
+        // Create the map
+        var mymap = L.map("map").setView([47.5, 19.0], 7);
+
+        // Add the OpenStreetMap tile layer
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+          maxZoom: 18,
+        }).addTo(mymap);
+
+        // Add markers to the map
+        Object.keys(cityData).forEach(function (city) {
+          var data = cityData[city];
+          var isoCode = data.isoCode;
+          var patients = data.patients;
+          var ctScanDevices = data.ctScanDevices;
+
+          var coordinates = getCityCoordinates(isoCode);
+          var marker = L.marker(coordinates).addTo(mymap);
+          marker.bindPopup(
+            "<b>" +
+            city +
+            "</b><br>ISO Code: " +
+            isoCode +
+            "<br>Patients: " +
+            patients +
+            "<br>CT Scan Devices: " +
+            ctScanDevices
+          );
+
+          // Update the card when clicking on a marker
+          marker.on("click", function () {
+            displayValue(patients, document.getElementById("card1"));
+            displayValue(ctScanDevices, document.getElementById("card2"));
+          });
+        });
+
+        // Function to get the coordinates of a city based on its ISO code
+        function getCityCoordinates(isoCode) {
+          switch (isoCode) {
+            case "HU-BU":
+              return [47.4984, 19.0408]; // Budapest
+            case "HU-DE":
+              return [47.5316, 21.6273]; // Debrecen
+            case "HU-TB":
+              return [47.5709, 18.4242]; // Tatabánya
+            case "HU-PS":
+              return [46.0763, 18.2281]; // Pécs
+            // Add more cases for other cities
+            default:
+              return [0, 0]; // Default to [0, 0] if coordinates are not found
+          }
+        }
+
+        // Function to display a value in the card
+        function displayValue(value, card) {
+          card.textContent = value;
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  </script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

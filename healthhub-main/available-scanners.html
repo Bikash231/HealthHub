@@ -1,234 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HealthHub</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.html"
-          ><img
-            src="img/healthub-logo.png"
-            class="pe-4"
-            height="24px"
-            alt="HealthHub"
-        /></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="assessment.html"
-                >New Assessment</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appointments.html"
-                >Patient Appointments</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-annual.html"
-                >Annual Statistics</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="statistics-geographic.html"
-                >Geographic Statistics</a
-              >
-            </li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-sm btn-outline-secondary" href="#"
-              >Logged in as: Dr. G. Horvath</a
-            >
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthHub</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+
+<body class="bg-primary">
+  <nav class="navbar navbar-expand-lg border-bottom mb-4" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="index.html"><img src="img/healthub-logo.png" class="pe-4" height="24px" alt="HealthHub" /></a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="assessment.html">New Assessment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments.html">Patient Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-annual.html">Annual Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics-geographic.html">Geographic Statistics</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a class="btn btn-sm btn-outline-primary" href="#">Logged in as: Dr. G. Horvath</a>
         </div>
       </div>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="card p-4 text-center bg-light">
-            <h2>Available CT Scanners</h2>
-            <p>Select a Date Range</p>
-            <div class="row" id="datepickerArea">
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <span for="startDate" class="input-group-text"
-                    >Start Date</span
-                  >
-                  <input id="startDate" class="form-control" type="date" />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <span for="endDate" class="input-group-text">End Date</span>
-                  <input id="endDate" class="form-control" type="date" />
-                </div>
-              </div>
-              <div class="col-12 test-end">
-                <button class="btn btn-outline-primary" onclick="showMap()">
-                  Find CT Scanners for Date Range
-                </button>
+    </div>
+  </nav>
+
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col">
+        <div class="card p-4 text-center bg-light">
+          <h2>Available CT Scanners</h2>
+          <p>Select a Date Range</p>
+          <div class="row" id="datepickerArea">
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <span for="startDate" class="input-group-text">Start Date</span>
+                <input id="startDate" class="form-control" type="date" />
               </div>
             </div>
-          </div>
-          <div class="row" id="mapArea" style="display: none">
-            <div class="col-12">
-              <div class="alert alert-success my-4">
-                <h2>Next Available Appointments:</h2>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                    checked
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    International Medical Science Center, 16.06.2023: 8:30–12:30
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Károlyi Sándor Hospital, 12.07.2023: 10:30–14:30
-                  </label>
-                </div>
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <span for="endDate" class="input-group-text">End Date</span>
+                <input id="endDate" class="form-control" type="date" />
               </div>
-              <p class="text-end">
-                <a
-                  href="#"
-                  class="btn btn-outline-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#confirmReservation"
-                  >Reserve CT Scan</a
-                >
-                <a
-                  href="#"
-                  class="btn btn-outline-danger"
-                  data-bs-toggle="modal"
-                  data-bs-target="#emergencyRequest"
-                  >Priority Request</a
-                >
+            </div>
+            <div class="col-12 test-end">
+              <button class="btn btn-primary" onclick="showMap()">
+                Find CT Scanners for Date Range
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="mapArea" style="display: none">
+          <div class="col-12">
+            <div class="alert alert-success my-4">
+              <h2>Next Available Appointments:</h2>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  International Medical Science Center, 16.06.2023: 8:30–12:30
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Károlyi Sándor Hospital, 12.07.2023: 10:30-4:30
+                </label>
+              </div>
+              <p>If you medical opinion of the patient requires an <strong>appointment sooner</strong></strong>, you can
+                send a priority request.
               </p>
-              <img
-                src="img/scanner-map-marked.png"
-                alt="Available Scanners"
-                class="img-fluid rounded mb-4"
-              />
+              <p class="text-end">
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmReservation">Reserve
+                  CT
+                  Scan</a>
+                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#emergencyRequest">Priority
+                  Request</a>
+              </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="confirmReservation"
-      tabindex="-1"
-      aria-labelledby="confirmReservationLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="confirmReservationLabel">
-              Reservation for CT Scan Confirmed
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Your reservation for a CT scan at the International Medical
-              Science Center on 16.06.2023 at 8:30 has been confirmed.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </a>
-            <a type="button" class="btn btn-primary" href="appointments.html">
-              Open Calendar
-            </a>
+            <img src="img/scanner-map-marked.png" alt="Available Scanners" class="img-fluid rounded mb-4" />
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="emergencyRequest"
-      tabindex="-1"
-      aria-labelledby="emergencyRequestLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="emergencyRequestLabel">
-              Priority Request for CT Scan
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Your Priority Request for a CT scan at the International Medical
-              Science Center has been submitted.
-            </p>
-            <p>
-              It needs to be reviewed by the staff at the International Medical
-              Science Center. You will be notified about the result of the
-              review.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </a>
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="confirmReservation" tabindex="-1" aria-labelledby="confirmReservationLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="confirmReservationLabel">
+            Reservation for CT Scan Confirmed
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Your reservation for a CT scan at the <strong>International Medical
+              Science Center</strong> on 16.06.2023 at 8:30 has been <strong>confirmed.</strong>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </a>
+          <a type="button" class="btn btn-primary" href="appointments.html">
+            Open Calendar
+          </a>
         </div>
       </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script>
-      function showMap() {
-        document.getElementById("mapArea").style.display = "block";
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="emergencyRequest" tabindex="-1" aria-labelledby="emergencyRequestLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="emergencyRequestLabel">
+            Priority Request for CT Scan
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Your Priority Request for a CT scan at the <strong>International Medical
+              Science Center</strong> has been submitted.
+          </p>
+          <p>
+            It needs to be reviewed by the staff at the International Medical
+            Science Center. You will be notified about the result of the
+            review.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="noDate" tabindex="-1" aria-labelledby="noDateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="noDateLabel">
+            Enter a Date Range
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            One of the dates in the date range is missing.<br />
+            <strong>Enter any date to proceed.</strong>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showMap() {
+      const startDateValue = document.getElementById("startDate").value;
+      const endDateValue = document.getElementById("endDate").value;
+
+      if (!startDateValue || !endDateValue) {
+        const noDateModal = new bootstrap.Modal(document.getElementById('noDate'), { keyboard: true });
+        noDateModal.show();
+        return;
       }
-    </script>
-  </body>
+      document.getElementById("mapArea").style.display = "block";
+    }
+  </script>
+</body>
+
 </html>
