@@ -1,3 +1,6 @@
 # HealthHub
-A Grand winning project of CraftHub Hackathon 2023 that has the potential to transform the future of healthcare🏆!
-leveraging Al to revolutionize CT scan bookings, the platform optimizes patient logistics, provides transparent Real-time waiting lists, and proactively forecasts nationwide hospital equipment needs and nearby CT scans Hospitals with Google Maps. 
+Assisting doctors assess the necessity of a CT scan and schedule a CT appointment - like "Uber for CT Scans".
+
+This was created during the CraftHack 2023 Hackathon. The web app can be tried here: https://ptstest.com/healthhub/
+
+Find out more about the team's hackathon experience here: https://marincomics.com/crafthack2023.html
